@@ -1,4 +1,5 @@
 import ky from 'ky';
+import { toast } from 'react-toastify';
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '35608601-7cda014b012f6d1bf4756c5e4';
@@ -20,7 +21,7 @@ async function onSearch(search) {
     const gallery = await ky.get(BASE_URL, options).json();
     return gallery;
   } catch (error) {
-    alert(error);
+    toast.error('Error');
     throw error;
   }
 }

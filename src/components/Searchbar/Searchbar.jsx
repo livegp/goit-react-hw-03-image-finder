@@ -1,5 +1,6 @@
 import { Formik } from 'formik';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { toast } from 'react-toastify';
 
 import {
   Searchbar,
@@ -11,6 +12,10 @@ import {
 
 function Search({ onSubmit }) {
   const handleSubmit = (values, actions) => {
+    if (values.search.trim() === '') {
+      toast.error('Enter a word to search for:');
+      return;
+    }
     onSubmit(values.search);
     actions.resetForm();
   };

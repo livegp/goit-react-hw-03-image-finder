@@ -1,9 +1,8 @@
 import { Component } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Container from './App.styled';
-import onSearch from '../../services/api';
 import Button from '../Button/Button';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import Loader from '../Loader/Loader';
@@ -12,28 +11,23 @@ import Search from '../Searchbar/Searchbar';
 
 class App extends Component {
   state = {
-    gallery: []
+    search: ''
   };
 
-  handleSearchSubmit = async search => {
-    try {
-      const galleryData = await onSearch(search);
-      this.setState({ gallery: galleryData.hits });
-    } catch (error) {
-      toast.error('Error fetching data:', { hideProgressBar: true });
-    }
+  handleSearchSubmit = search => {
+    this.setState({ search });
   };
 
   render() {
-    const { gallery } = this.state;
+    const { search } = this.state;
     return (
       <Container>
         <Search onSubmit={this.handleSearchSubmit} />
-        <ImageGallery gallery={gallery} />
+        <ImageGallery search={search} />
         <Button />
         <Loader />
         <ModalWindow />
-        <ToastContainer />
+        <ToastContainer hideProgressBar />
       </Container>
     );
   }
