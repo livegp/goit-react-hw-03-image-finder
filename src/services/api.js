@@ -20,7 +20,7 @@ async function onSearch(search) {
     const gallery = await ky.get(BASE_URL, options).json();
     return gallery;
   } catch (error) {
-    console.log(error);
+    alert(error);
     throw error;
   }
 }
