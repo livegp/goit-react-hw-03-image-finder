@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Component } from 'react';
 
-import { Modal, Overlay } from './Modal.styled';
+import { Container, Overlay } from './Modal.styled';
 
-class ModalWindow extends Component {
+class Modal extends Component {
   componentDidMount() {
     document.addEventListener('mousedown', this.handleOutsideClick);
     document.addEventListener('keydown', this.handleKeyPress);
@@ -35,12 +36,18 @@ class ModalWindow extends Component {
     const { src, alt } = this.props;
     return (
       <Overlay>
-        <Modal ref={this.setModalRef}>
+        <Container ref={this.setModalRef}>
           <img src={src} alt={alt} />
-        </Modal>
+        </Container>
       </Overlay>
     );
   }
 }
 
-export default ModalWindow;
+Modal.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired
+};
+
+export default Modal;

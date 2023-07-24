@@ -7,8 +7,8 @@ import onSearch from '../../services/api';
 import Button from '../Button/Button';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import Loader from '../Loader/Loader';
-import ModalWindow from '../Modal/Modal';
-import Search from '../Searchbar/Searchbar';
+import Modal from '../Modal/Modal';
+import Searchbar from '../Searchbar/Searchbar';
 
 class App extends Component {
   state = {
@@ -69,11 +69,11 @@ class App extends Component {
     const { data, loading, modal, selected, total } = this.state;
     return (
       <Container>
-        <Search onSubmit={this.handleSearchSubmit} />
+        <Searchbar onSubmit={this.handleSearchSubmit} />
         <ImageGallery data={data} onClick={this.selectItem} />
         {loading && <Loader />}
         {modal && selected && (
-          <ModalWindow
+          <Modal
             onClose={this.closeModal}
             src={selected.largeImageURL}
             alt={selected.tags}

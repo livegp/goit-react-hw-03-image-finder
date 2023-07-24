@@ -1,16 +1,17 @@
 import { Formik } from 'formik';
+import PropTypes from 'prop-types';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 
 import {
-  Searchbar,
+  Container,
   SearchForm,
   SearchFormButton,
   SearchFormInput,
   SearchFormLabel
 } from './Searchbar.styled';
 
-function Search({ onSubmit }) {
+function Searchbar({ onSubmit }) {
   const handleSubmit = (values, actions) => {
     if (values.search.trim() === '') {
       toast.error('Enter a word to search for:');
@@ -21,7 +22,7 @@ function Search({ onSubmit }) {
   };
 
   return (
-    <Searchbar>
+    <Container>
       <Formik initialValues={{ search: '' }} onSubmit={handleSubmit}>
         <SearchForm>
           <SearchFormButton type="submit" value="submit">
@@ -36,8 +37,12 @@ function Search({ onSubmit }) {
           />
         </SearchForm>
       </Formik>
-    </Searchbar>
+    </Container>
   );
 }
 
-export default Search;
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};
+
+export default Searchbar;
