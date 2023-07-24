@@ -28,6 +28,8 @@ function ImageGallery({ data, onClick }) {
   );
 }
 
-ImageGallery.propTypes = {};
+ImageGallery.propTypes = {
+  onClick: PropTypes.func.isRequired
+};
 
 export default ImageGallery;
