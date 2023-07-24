@@ -29,7 +29,13 @@ function ImageGallery({ data, onClick }) {
 }
 
 ImageGallery.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired
+    }).isRequired
+  ).isRequired
 };
 
 export default ImageGallery;
