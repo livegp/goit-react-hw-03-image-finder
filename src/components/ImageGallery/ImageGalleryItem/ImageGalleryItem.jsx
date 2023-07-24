@@ -18,6 +18,7 @@ function ImageGalleryItem({ id, src, alt, onClick }) {
 ImageGalleryItem.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired
 };
 

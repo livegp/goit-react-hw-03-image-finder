@@ -34,7 +34,8 @@ ImageGallery.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      webformatURL: PropTypes.string.isRequired
+      webformatURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired
     }).isRequired
   ).isRequired
 };
