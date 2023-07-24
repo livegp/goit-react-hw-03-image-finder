@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import PropTypes from 'prop-types';
 
 import Gallery from './ImageGalleryItem.styled';
@@ -10,7 +8,7 @@ function ImageGalleryItem({ id, src, alt, onClick }) {
   };
   return (
     <Gallery>
-      <img src={src} alt={alt} onClick={handleClick} />
+      <img src={src} alt={alt} onClick={handleClick} role="presentation" />
     </Gallery>
   );
 }
