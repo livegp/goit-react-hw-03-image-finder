@@ -21,5 +21,6 @@ export const Container = styled.div`
   img {
     max-width: 70vw;
     height: auto;
+    background-color: #eee;
   }
 `;
