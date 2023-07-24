@@ -2,9 +2,13 @@
   "cSpell.ignoreWords": [
     "Marica",
     "Roboto",
+    "Searchbar",
+    "Toastify",
     "goit",
     "pmarica",
+    "safesearch",
     "stylelint",
+    "webformat",
     "wght"
   ],
   "editor.formatOnPaste": false,

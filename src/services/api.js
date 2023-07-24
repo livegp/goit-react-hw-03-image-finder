@@ -1,19 +1,23 @@
+// api.js
 import ky from 'ky';
 import { toast } from 'react-toastify';
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '35608601-7cda014b012f6d1bf4756c5e4';
+const DEFAULT_PARAMS = {
+  key: API_KEY,
+  image_type: 'photo',
+  orientation: 'horizontal',
+  safesearch: true,
+  per_page: 12
+};
 
-async function onSearch(search) {
+async function onSearch(search, page) {
   const options = {
     searchParams: {
-      key: API_KEY,
-      image_type: 'photo',
-      orientation: 'horizontal',
-      safesearch: true,
-      per_page: 40,
-      page: 1,
-      q: search
+      ...DEFAULT_PARAMS,
+      q: search,
+      page
     }
   };
 
@@ -21,8 +25,8 @@ async function onSearch(search) {
     const gallery = await ky.get(BASE_URL, options).json();
     return gallery;
   } catch (error) {
-    toast.error('Error');
-    throw error;
+    toast.error('Error fetching data. Please try again later.');
+    throw new Error(`API request failed: ${error.message}`);
   }
 }
 

@@ -1,51 +1,30 @@
-import { Component } from 'react';
+import React from 'react';
 
-import Button from './Button/Button';
 import Container from './ImageGallery.styled';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
-import Loader from './Loader/Loader';
-import ModalWindow from './Modal/Modal';
-import onSearch from '../../services/api';
 
-class ImageGallery extends Component {
-  state = {
-    gallery: null,
-    loading: false
+function ImageGallery({ data, onClick }) {
+  const selectItem = id => {
+    const selectedImage = data.find(image => image.id === id);
+    if (selectedImage) {
+      onClick(selectedImage);
+    }
   };
 
-  componentDidUpdate(prevProps) {
-    const { search } = this.props;
-    if (prevProps.search !== search) {
-      this.setState({ loading: true });
-      onSearch(search).then(data => {
-        this.setState({ gallery: data.hits, loading: false });
-      });
-    }
-  }
-
-  render() {
-    const { gallery, loading } = this.state;
-    return (
-      <>
-        {loading && <Loader />}
-        {gallery ? (
-          <>
-            <Container>
-              {gallery.map(image => (
-                <ImageGalleryItem
-                  key={image.id}
-                  src={image.webformatURL}
-                  alt={image.tags}
-                />
-              ))}
-            </Container>
-            <Button />
-            <ModalWindow />
-          </>
-        ) : null}
-      </>
-    );
-  }
+  return (
+    data && (
+      <Container>
+        {data.map(image => (
+          <ImageGalleryItem
+            key={image.id}
+            src={image.webformatURL}
+            alt={image.id}
+            onClick={selectItem}
+          />
+        ))}
+      </Container>
+    )
+  );
 }
 
 export default ImageGallery;

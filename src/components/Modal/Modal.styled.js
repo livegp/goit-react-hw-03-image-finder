@@ -6,7 +6,7 @@ export const Overlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
@@ -14,6 +14,12 @@ export const Overlay = styled.div`
 `;
 
 export const Modal = styled.div`
+  position: relative;
   max-width: calc(100vw - 48px);
   max-height: calc(100vh - 24px);
+
+  img {
+    max-width: 70vw;
+    height: auto;
+  }
 `;
