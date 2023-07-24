@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import Container from './ImageGallery.styled';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
@@ -18,7 +18,7 @@ function ImageGallery({ data, onClick }) {
           <ImageGalleryItem
             key={image.id}
             src={image.webformatURL}
-            alt={image.tags}
+            alt={image.id}
             onClick={selectItem}
           />
         ))}
@@ -26,16 +26,5 @@ function ImageGallery({ data, onClick }) {
     )
   );
 }
-
-ImageGallery.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      webformatURL: PropTypes.string.isRequired,
-      tags: PropTypes.string.isRequired
-    }).isRequired
-  ).isRequired,
-  onClick: PropTypes.func.isRequired
-};
 
 export default ImageGallery;
