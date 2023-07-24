@@ -17,7 +17,8 @@ class App extends Component {
     loading: false,
     modal: false,
     selected: null,
-    page: 1
+    page: 1,
+    total: 0
   };
 
   componentDidUpdate(_, prevState) {
@@ -25,7 +26,11 @@ class App extends Component {
     if (prevState.search !== search) {
       this.setState({ loading: true, page: 1 });
       onSearch(search, 1).then(data => {
-        this.setState({ data: data.hits, loading: false });
+        this.setState({
+          data: data.hits,
+          total: data.totalHits,
+          loading: false
+        });
       });
     }
   }
@@ -61,7 +66,7 @@ class App extends Component {
   };
 
   render() {
-    const { data, loading, modal, selected } = this.state;
+    const { data, loading, modal, selected, total } = this.state;
     return (
       <Container>
         <Search onSubmit={this.handleSearchSubmit} />
@@ -74,7 +79,7 @@ class App extends Component {
             alt={selected.tags}
           />
         )}
-        {!loading && data.length > 0 && (
+        {!loading && data.length < total && (
           <Button onClick={this.handleLoadMore} />
         )}
         <ToastContainer hideProgressBar />
