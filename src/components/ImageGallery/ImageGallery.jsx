@@ -28,4 +28,6 @@ function ImageGallery({ data, onClick }) {
   );
 }
 
+ImageGallery.propTypes = {};
+
 export default ImageGallery;
