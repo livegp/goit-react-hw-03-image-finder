@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 import Gallery from './ImageGalleryItem.styled';
 
-function ImageGalleryItem({ src, alt, onClick }) {
+function ImageGalleryItem({ id, src, alt, onClick }) {
   const handleClick = () => {
-    onClick(alt);
+    onClick(id);
   };
   return (
     <Gallery>

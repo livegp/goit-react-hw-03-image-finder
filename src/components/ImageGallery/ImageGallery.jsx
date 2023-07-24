@@ -18,8 +18,9 @@ function ImageGallery({ data, onClick }) {
         {data.map(image => (
           <ImageGalleryItem
             key={image.id}
+            id={image.id}
             src={image.webformatURL}
-            alt={image.id}
+            alt={image.tags}
             onClick={selectItem}
           />
         ))}
