@@ -49,18 +49,22 @@ class App extends Component {
 
   handleLoadMore = () => {
     const { search, page } = this.state;
-    const nextPage = page + 1;
+    this.fetchData(search, page + 1);
+  };
 
-    this.setState({ loading: true, page: nextPage });
-    onSearch(search, nextPage)
+  fetchData = (search, page) => {
+    this.setState({ loading: true, page });
+
+    onSearch(search, page)
       .then(newData => {
         this.setState(prevState => ({
-          data: [...prevState.data, ...newData.hits],
+          data:
+            page === 1 ? newData.hits : [...prevState.data, ...newData.hits],
           loading: false
         }));
       })
       .catch(error => {
-        toast.error('Error fetching data. Please try again later.');
+        toast.error(`Error fetching data: ${error.message}`);
         this.setState({ loading: false });
       });
   };
