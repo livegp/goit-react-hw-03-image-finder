@@ -1,4 +1,3 @@
-// api.js
 import ky from 'ky';
 import { toast } from 'react-toastify';
 
@@ -25,7 +24,7 @@ async function onSearch(search, page) {
     const gallery = await ky.get(BASE_URL, options).json();
     return gallery;
   } catch (error) {
-    toast.error('Error fetching data. Please try again later.');
+    toast.error(`Error fetching data: ${error.message}`);
     throw new Error(`API request failed: ${error.message}`);
   }
 }
