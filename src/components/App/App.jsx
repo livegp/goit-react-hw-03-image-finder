@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,18 +25,15 @@ class App extends Component {
     const { search } = this.state;
     if (prevState.search !== search) {
       this.setState({ loading: true, page: 1 });
-      onSearch(search, 1).then(data => {
-        this.setState({
-          data: data.hits,
-          total: data.totalHits,
-          loading: false
-        });
-      });
+      this.fetchData(search, 1);
     }
   }
 
   handleSearchSubmit = search => {
-    this.setState({ search });
+    const { search: currentSearch } = this.state;
+    if (currentSearch !== search) {
+      this.setState({ search });
+    }
   };
 
   selectItem = selected => {
@@ -60,6 +57,7 @@ class App extends Component {
         this.setState(prevState => ({
           data:
             page === 1 ? newData.hits : [...prevState.data, ...newData.hits],
+          total: newData.totalHits,
           loading: false
         }));
       })
