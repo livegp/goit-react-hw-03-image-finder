@@ -22,17 +22,16 @@ class App extends Component {
   };
 
   componentDidUpdate(_, prevState) {
-    const { search } = this.state;
-    if (prevState.search !== search) {
-      this.setState({ page: 1 });
-      this.fetchData(search, 1);
+    const { search, page } = this.state;
+    if (prevState.search !== search || prevState.page !== page) {
+      this.fetchData(search, page);
     }
   }
 
   handleSearchSubmit = search => {
     const { search: currentSearch } = this.state;
     if (currentSearch !== search) {
-      this.setState({ search });
+      this.setState({ search, page: 1 });
     }
   };
 
@@ -45,12 +44,11 @@ class App extends Component {
   };
 
   handleLoadMore = () => {
-    const { search, page } = this.state;
-    this.fetchData(search, page + 1);
+    this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   fetchData = (search, page) => {
-    this.setState({ loading: true, page });
+    this.setState({ loading: true });
 
     onSearch(search, page)
       .then(newData => {
