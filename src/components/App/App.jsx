@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -35,16 +35,16 @@ class App extends Component {
     }
   };
 
+  handleLoadMore = () => {
+    this.setState(prevState => ({ page: prevState.page + 1 }));
+  };
+
   selectItem = selected => {
     this.setState({ selected, modal: true });
   };
 
   closeModal = () => {
     this.setState({ modal: false });
-  };
-
-  handleLoadMore = () => {
-    this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   fetchData = (search, page) => {
