@@ -13,7 +13,7 @@ import Searchbar from '../Searchbar/Searchbar';
 class App extends Component {
   state = {
     search: '',
-    data: [],
+    hits: [],
     loading: false,
     modal: false,
     selected: null,
@@ -53,8 +53,8 @@ class App extends Component {
     onSearch(search, page)
       .then(newData => {
         this.setState(prevState => ({
-          data:
-            page === 1 ? newData.hits : [...prevState.data, ...newData.hits],
+          hits:
+            page === 1 ? newData.hits : [...prevState.hits, ...newData.hits],
           total: newData.totalHits,
           loading: false
         }));
@@ -66,11 +66,12 @@ class App extends Component {
   };
 
   render() {
-    const { data, loading, modal, selected, total } = this.state;
+    const { hits, loading, modal, selected, total } = this.state;
     return (
       <Container>
         <Searchbar onSubmit={this.handleSearchSubmit} />
-        <ImageGallery data={data} onClick={this.selectItem} />
+        <ImageGallery data={hits} onClick={this.selectItem} />{' '}
+        {/* Renamed "data" to "hits" */}
         {loading && <Loader />}
         {modal && selected && (
           <Modal
@@ -79,7 +80,7 @@ class App extends Component {
             alt={selected.tags}
           />
         )}
-        {!loading && data.length < total && (
+        {!loading && hits.length < total && (
           <Button onClick={this.handleLoadMore} />
         )}
         <ToastContainer hideProgressBar />
