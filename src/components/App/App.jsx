@@ -24,7 +24,7 @@ class App extends Component {
   componentDidUpdate(_, prevState) {
     const { search } = this.state;
     if (prevState.search !== search) {
-      this.setState({ loading: true, page: 1 });
+      this.setState({ page: 1 });
       this.fetchData(search, 1);
     }
   }
